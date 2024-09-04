@@ -25,7 +25,3 @@ A full-stack web application built with Next.js, Tailwind CSS, and MongoDB, util
 - 🚀 **Serverless Functions**: Leverage Next.js API routes for serverless backend functionality.
 - 🔗 **Deployment**: The application is deployed using Vercel and can be accessed [here](https://next-js-crud-178120e1z-suman196pokhrel.vercel.app).
 - 📝 **CRUD Operations**: Perform Create, Read, Update, and Delete operations for managing data efficiently.
-
-## Deployment
-
-The project is deployed using Vercel and can be accessed at [https://next-js-crud-178120e1z-suman196pokhrel.vercel.app](https://next-js-crud-178120e1z-suman196pokhrel.vercel.app).
