@@ -21,6 +21,13 @@ describe('CreatePrompt Component', () => {
     mockRouterPush = jest.fn()
     useRouter.mockReturnValue({ push: mockRouterPush })
     useSession.mockReturnValue({ data: { user: { id: '123' } } })
+    
+    // Reset fetch mock after each test
+    global.fetch = jest.fn()
+  })
+
+  afterEach(() => {
+    jest.resetAllMocks()
   })
 
   test('renders CreatePrompt component', () => {
@@ -30,11 +37,9 @@ describe('CreatePrompt Component', () => {
 
   test('submits form and redirects on success', async () => {
     // Mock the fetch API
-    global.fetch = jest.fn(() =>
-      Promise.resolve({
-        ok: true
-      })
-    )
+    global.fetch.mockResolvedValueOnce({
+      ok: true
+    })
 
     render(<CreatePrompt />)
     
@@ -65,9 +70,7 @@ describe('CreatePrompt Component', () => {
 
   test('handles form submission error', async () => {
     // Mock fetch to reject
-    global.fetch = jest.fn(() =>
-      Promise.reject(new Error('Network error'))
-    )
+    global.fetch.mockRejectedValueOnce(new Error('Network error'))
 
     render(<CreatePrompt />)
     
