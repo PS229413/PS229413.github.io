@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
@@ -41,3 +42,7 @@ node_modules/*
 =======
 node_modules/@next/swc-win32-x64-msvc/next-swc.win32-x64-msvc.node
 >>>>>>> refs/remotes/origin/main
+=======
+node_modules/*
+node_modules/@next/swc-win32-x64-msvc/next-swc.win32-x64-msvc.node
+>>>>>>> a7e76d5cd7f726ca630c3d448e3143b64863c670
