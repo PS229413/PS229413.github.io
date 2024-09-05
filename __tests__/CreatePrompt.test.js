@@ -1,56 +1,68 @@
-// CreatePrompt.test.js
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
-import CreatePrompt from '@/components/CreatePrompt'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import CreatePrompt from '../app/create-prompt/page'; // Adjust path if needed
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 // Mock the useSession and useRouter hooks
 jest.mock('next-auth/react', () => ({
   useSession: jest.fn()
-}))
+}));
 
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn()
-}))
+}));
 
 describe('CreatePrompt Component', () => {
-  let mockRouterPush
+  let mockRouterPush;
+  let originalConsoleLog;
+  let originalConsoleError;
+
+  beforeAll(() => {
+    // Suppress console logs and errors during tests
+    originalConsoleLog = console.log;
+    originalConsoleError = console.error;
+    console.log = jest.fn();
+    console.error = jest.fn();
+  });
 
   beforeEach(() => {
-    mockRouterPush = jest.fn()
-    useRouter.mockReturnValue({ push: mockRouterPush })
-    useSession.mockReturnValue({ data: { user: { id: '123' } } })
-    
+    mockRouterPush = jest.fn();
+    useRouter.mockReturnValue({ push: mockRouterPush });
+    useSession.mockReturnValue({ data: { user: { id: '123' } } });
+
     // Reset fetch mock after each test
-    global.fetch = jest.fn()
-  })
+    global.fetch = jest.fn();
+  });
 
   afterEach(() => {
-    jest.resetAllMocks()
-  })
+    jest.resetAllMocks();
+  });
+
+  afterAll(() => {
+    // Restore the original console functions
+    console.log = originalConsoleLog;
+    console.error = originalConsoleError;
+  });
 
   test('renders CreatePrompt component', () => {
-    render(<CreatePrompt />)
-    expect(screen.getByText(/Create/i)).toBeInTheDocument()
-  })
+    render(<CreatePrompt />);
+    
+    expect(screen.getByText(/Create Post/i)).toBeInTheDocument();
+  });
 
   test('submits form and redirects on success', async () => {
-    // Mock the fetch API
     global.fetch.mockResolvedValueOnce({
       ok: true
-    })
+    });
 
-    render(<CreatePrompt />)
+    render(<CreatePrompt />);
     
-    // Fill in the form fields
-    fireEvent.change(screen.getByLabelText(/Prompt/i), { target: { value: 'New Prompt' } })
-    fireEvent.change(screen.getByLabelText(/Tag/i), { target: { value: 'New Tag' } })
-    
-    // Submit the form
-    fireEvent.click(screen.getByText(/Submit/i))
+    fireEvent.change(screen.getByPlaceholderText(/write your prompt here/i), { target: { value: 'New Prompt' } });
+    fireEvent.change(screen.getByPlaceholderText(/#tag/i), { target: { value: 'New Tag' } });
+    fireEvent.click(screen.getByRole('button', { name: /Create/i }));
 
-    // Assert that fetch was called with correct parameters
     await waitFor(() => {
       expect(global.fetch).toHaveBeenCalledWith('/api/prompt/new', expect.objectContaining({
         method: 'POST',
@@ -59,33 +71,25 @@ describe('CreatePrompt Component', () => {
           userId: '123',
           tag: 'New Tag'
         })
-      }))
-    })
+      }));
+    });
 
-    // Assert that router.push was called
     await waitFor(() => {
-      expect(mockRouterPush).toHaveBeenCalledWith('/')
-    })
-  })
+      expect(mockRouterPush).toHaveBeenCalledWith('/');
+    });
+  });
 
   test('handles form submission error', async () => {
-    // Mock fetch to reject
-    global.fetch.mockRejectedValueOnce(new Error('Network error'))
+    global.fetch.mockRejectedValueOnce(new Error('Network error'));
 
-    render(<CreatePrompt />)
+    render(<CreatePrompt />);
     
-    // Fill in the form fields
-    fireEvent.change(screen.getByLabelText(/Prompt/i), { target: { value: 'New Prompt' } })
-    fireEvent.change(screen.getByLabelText(/Tag/i), { target: { value: 'New Tag' } })
-    
-    // Submit the form
-    fireEvent.click(screen.getByText(/Submit/i))
+    fireEvent.change(screen.getByPlaceholderText(/write your prompt here/i), { target: { value: 'New Prompt' } });
+    fireEvent.change(screen.getByPlaceholderText(/#tag/i), { target: { value: 'New Tag' } });
+    fireEvent.click(screen.getByRole('button', { name: /Create/i }));
 
-    // Assert that fetch was called
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalled()
-    })
-
-    // No need to assert router.push here as it should not be called on error
-  })
-})
+      expect(global.fetch).toHaveBeenCalled();
+    });
+  });
+});
