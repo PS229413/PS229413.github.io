@@ -36,4 +36,8 @@ yarn-error.log*
 next-env.d.ts
 =======
 node_modules/*
+<<<<<<< HEAD
 >>>>>>> 6dc33a1162d00811cf4c7be485408aeeb673e1a5
+=======
+node_modules/@next/swc-win32-x64-msvc/next-swc.win32-x64-msvc.node
+>>>>>>> refs/remotes/origin/main
