@@ -1,18 +1,20 @@
 name: Deploy to GitHub Pages
 
-# You can run this workflow manually or set it to run on a specific trigger
 on:
   push:
     branches:
-      - main  # Change this to your default branch
-  workflow_dispatch:  # Allows you to run the workflow manually from the Actions tab
+      - main  # Update to your main branch or the branch you want to deploy from
+  workflow_dispatch:  # Allows manual triggers from the Actions tab
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write  # Allows the Action to push changes
+
     steps:
-      # Step 1: Check out the latest code
+      # Step 1: Checkout the latest code
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -20,21 +22,20 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'  # Change to the version your project requires
+          node-version: '18'  # Use the Node.js version your project requires
 
       # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
       # Step 4: Build the project
-      # Adjust this command to match your build script in package.json (e.g., `npm run build`)
+      # Ensure this matches your project's build command
       - name: Build project
         run: npm run build
 
-      # Step 5: Deploy to GitHub Pages using peaceiris/actions-gh-pages
+      # Step 5: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub's built-in token
-          publish_dir: .next  # Adjust to your output directory
-          destination_dir: ''  # Optional, leave blank if you are deploying to the root
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .next  # Adjust to match your build output directory
