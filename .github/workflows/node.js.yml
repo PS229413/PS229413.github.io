@@ -44,8 +44,8 @@ jobs:
 
     - name: Configure Git
       run: |
-        git config --global user.email "github-actions@github.com"
-        git config --global user.name "github-actions"
+        git config --global user.email "PS229413@summacollege.nl"
+        git config --global user.name "PS229413"
 
     - name: Deploy to GitHub Pages
       run: |
