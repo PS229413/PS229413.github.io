@@ -2,17 +2,20 @@
   "name": "promptopia",
   "version": "0.1.0",
   "private": true,
-    "homepage": "https://ps229413.github.io/ps229413.github.io.git",
+  "homepage": "https://ps229413.github.io/ps229413.github.io.git",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest"
+    "test": "jest",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "autoprefixer": "10.4.15",
     "bcrypt": "^5.1.1",
+    "gh-pages": "^6.1.1",
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.3",
     "next": "13.4.19",
