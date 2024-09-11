@@ -51,3 +51,5 @@ jobs:
       run: |
         npm run build
         npx gh-pages -d .next
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
