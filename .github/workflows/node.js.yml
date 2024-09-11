@@ -51,4 +51,4 @@ jobs:
         npm run build
         npx gh-pages -d .next
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.MY_PERSONAL_ACCESS_TOKEN }}
