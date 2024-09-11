@@ -41,11 +41,6 @@ jobs:
     - name: Install dependencies
       run: npm install gh-pages --save-dev
 
-    - name: Configure Git
-      run: |
-        git config --global user.email "PS229413@summacollege.nl"
-        git config --global user.name "PS229413"
-
     - name: Deploy to GitHub Pages
       run: |
         npm run build
