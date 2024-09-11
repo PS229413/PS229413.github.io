@@ -50,6 +50,6 @@ jobs:
     - name: Deploy to GitHub Pages
       run: |
         npm run build
-        npx gh-pages -d .next
+        npx gh-pages -d out
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
