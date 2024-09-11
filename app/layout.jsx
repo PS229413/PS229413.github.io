@@ -4,7 +4,7 @@ import '@/styles/globals.css'
 
 export const metadata = {
   title: 'Creative Prompts',
-  description: 'A website to discover and share your ai prompts',
+  description: 'A website to discover and share your ai promptss',
 }
 
 export default function RootLayout({ children }) {
