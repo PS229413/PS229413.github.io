@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -46,4 +45,4 @@ jobs:
     - name: Deploy to GitHub Pages
       run: |
         npm run build
-        npx gh-pages -d build
+        npx gh-pages -d .next
