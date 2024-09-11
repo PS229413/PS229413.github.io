@@ -2,7 +2,7 @@
   "name": "promptopia",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ps229413.github.io/ps229413.github.io.git",
+  "homepage": "https://ps229413.github.io/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
