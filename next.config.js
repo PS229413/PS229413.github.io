@@ -6,6 +6,6 @@ const nextConfig = {
 }
 module.exports = {
     output: 'export', // Allows Next.js to export static HTML
-    distDir: 'build', // Optional: to specify a custom build directory
+    distDir: 'out', // Optional: to specify a custom build directory
   };
 
