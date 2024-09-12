@@ -1,10 +1,14 @@
+// next.config.js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
+    experimental: {
+      appDir: true, // Ensure this is set if you use the App Directory
+    },
+    output: 'export', // Export static HTML
     images: {
-      domains: ['lh3.googleusercontent.com'],
+      domains: ['lh3.googleusercontent.com'], // Allow external image domains
     },
   }
   
   module.exports = nextConfig
-
+  
