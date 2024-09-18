@@ -36,6 +36,7 @@ const Nav = () => {
                     width={40}
                     height={40}
                     alt='profile'
+                    unoptimized
                 />
                 <p className='logo_text'>DiscPrompts</p>
             </Link>

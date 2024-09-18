@@ -6,9 +6,10 @@ const nextConfig = {
     },
     output: 'export', // Export static HTML
     images: {
+      unoptimized: true, // Disable image optimization
       domains: ['lh3.googleusercontent.com'], // Allow external image domains
     },
-  }
+  };
   
-  module.exports = nextConfig
+  module.exports = nextConfig;
   
